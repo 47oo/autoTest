@@ -1,12 +1,11 @@
 package com.cqupt.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Key {
+public class Key extends Keys{
 	private String name;
 	private String value;
-	private static List<Key> keychilds = new ArrayList<>();
+	private List<Key> keychilds;
 	public Key(){
 		
 	}
@@ -25,8 +24,8 @@ public class Key {
 	public List<Key> getKeychilds() {
 		return keychilds;
 	}
-	public void setKeyChild(Key key){
-		keychilds.add(key);
+	public void setKeyChilds(List<Key> keys){
+		this.keychilds=keys;
 	}
 	@Override
 	public String toString() {

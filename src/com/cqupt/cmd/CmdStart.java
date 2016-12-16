@@ -11,6 +11,7 @@ import org.dom4j.io.SAXReader;
 
 import com.cqupt.entity.Conf;
 import com.cqupt.entity.Key;
+import com.cqupt.entity.Keys;
 import com.cqupt.reflect.ObjectReflect;
 
 public class CmdStart {
@@ -22,7 +23,7 @@ public class CmdStart {
 		Element root = d.getRootElement();
 		String confname = root.getName();
 		Iterator<Attribute> it = root.attributeIterator();
-		ObjectReflect<Conf> o = new ObjectReflect<>();
+		ObjectReflect o = new ObjectReflect();
 		Conf conf = o.getObject(it, Conf.class);
 		System.out.println(conf);
 		Element chars = root.element("chars");
@@ -30,14 +31,17 @@ public class CmdStart {
 		//是否有混合的内容
 		System.out.println(chars.hasMixedContent());
 		Element keys = root.element("keys");
-		System.out.println(keys.hasMixedContent());
+		Keys ks = new Keys();
+		o.getObjectAll(keys.elementIterator(),ks);
+		System.out.println(ks.getList().get(0).getKeychilds().get(0));
+		/*System.out.println(keys.hasMixedContent());
 		List<Element> list = keys.elements();
 		for(int i =0;i<list.size();i++){
 			Element ee = list.get(i);
 			Iterator<Attribute> itt = ee.attributeIterator();
-			ObjectReflect<Key> oo = new ObjectReflect<>();
+			ObjectReflect oo = new ObjectReflect();
 			Key kk = oo.getObject(itt, Key.class);
 			System.out.println(kk);
-		}
+		}*/
 	}
 }

@@ -1,18 +1,17 @@
 package com.cqupt.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Keys {
-	private static List<Key> keyChilds = new ArrayList<>();
+	private List<Key> keyChilds;
 	
 	public Keys(){
 		
 	}
-	void addKeyChild(Key k){
-		keyChilds.add(k);
+	public void setKeyChilds(List<Key> keys){
+		this.keyChilds =keys;
 	}
-	List<Key> getList(){
+	public List<Key> getList(){
 		return keyChilds;
 	}
 }

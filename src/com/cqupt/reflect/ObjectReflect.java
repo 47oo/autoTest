@@ -2,9 +2,15 @@ package com.cqupt.reflect;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.dom4j.Attribute;
+import org.dom4j.Element;
+
+import com.cqupt.entity.Key;
+import com.cqupt.entity.Keys;
 
 /**
  * 
@@ -13,7 +19,7 @@ import org.dom4j.Attribute;
  * @param <T> 返回数据类型
  * @param <E> 迭代类元素类型
  */
-public class ObjectReflect<T>{
+public class ObjectReflect{
 	
 	private final static String PREFIX="set";
 	/**
@@ -27,8 +33,7 @@ public class ObjectReflect<T>{
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
 	 */
-	@SuppressWarnings("unchecked")
-	public T getObject(Iterator<Attribute> it,Class<T> clazz) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+	public <T>T getObject(Iterator<Attribute> it,Class<T> clazz) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		Object obj = clazz.newInstance();
 		while(it.hasNext()){
 			Attribute ae = it.next();
@@ -37,9 +42,22 @@ public class ObjectReflect<T>{
 			Method m = clazz.getMethod(PREFIX+getUpperByFirst(name), String.class);
 			m.invoke(obj, value);
 		}
-		return (T)obj;
+		return (T) obj;
 	}
 	
+	//循环嵌套,获得子节点和它的属性值
+	public void getObjectAll(Iterator<Element> it,Keys k) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+		ArrayList<Key> arr = new ArrayList<>();
+		while(it.hasNext()){
+			Element e = it.next();
+			Key key = getObject(e.attributeIterator(),Key.class);
+			if(e.hasMixedContent()){
+				getObjectAll(e.elementIterator(),key);
+			}
+			arr.add(key);
+		}
+		k.setKeyChilds(arr);
+	}
 	/**
 	 * 将节点名的第一个字母变为大写
 	 * @param name
