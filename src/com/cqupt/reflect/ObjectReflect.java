@@ -15,22 +15,21 @@ import com.cqupt.entity.Keys;
  * 
  * @author hp
  *
- * @param <T> ·µ»ØÊı¾İÀàĞÍ
- * @param <E> µü´úÀàÔªËØÀàĞÍ
  */
 public class ObjectReflect{
 	
 	private final static String PREFIX="set";
 	/**
-	 * ½«ÊôĞÔ·â×°¶ÔÏó
-	 * @param e
+	 * 
+	 * @param it èŠ‚ç‚¹å±æ€§çš„è¿­ä»£å½¢å¼
+	 * @param clazz éœ€è¦è¿”å›ç±»å‹çš„ç±»ç±»å‹
 	 * @return
-	 * @throws IllegalAccessException 
-	 * @throws InstantiationException 
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T>T getObject(Iterator<Attribute> it,Class<T> clazz) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
@@ -45,7 +44,17 @@ public class ObjectReflect{
 		return (T) obj;
 	}
 	
-	//Ñ­»·Ç¶Ì×,»ñµÃ×Ó½ÚµãºÍËüµÄÊôĞÔÖµ
+	/**
+	 * 
+	 * @param it èŠ‚ç‚¹å­å…ƒç´ çš„è¿­ä»£å½¢å¼
+	 * @param k éœ€è¦ä¼ é€’Keyå¯¹è±¡
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
 	@SuppressWarnings("unchecked")
 	public static void getObjectAll(Iterator<Element> it,Keys k) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		ArrayList<Key> keys = new ArrayList<>();
@@ -60,13 +69,13 @@ public class ObjectReflect{
 		k.setKeyChilds(keys);
 	}
 	/**
-	 * ½«½ÚµãÃûµÄµÚÒ»¸ö×ÖÄ¸±äÎª´óĞ´
+	 *å­—ç¬¦ä¸²è½¬åŒ–æ–¹å¼
 	 * @param name
 	 * @return
 	 */
 	private static String getUpperByFirst(String name){
 		if(name==null||name.trim().equals("")){
-			throw new RuntimeException("auto:====>>>name²»ÄÜÎª¿Õ");
+			throw new RuntimeException("auto:====>>>nameä¸å­˜åœ¨æˆ–è€…ä¸ºç©º");
 		}
 		String nameNew = name.substring(0, 1).toUpperCase()+name.substring(1);
 		return nameNew;

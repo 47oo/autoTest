@@ -1,14 +1,18 @@
 package com.cqupt.entity;
 
 import java.util.List;
-
+/**
+ * 
+ * @author 47
+ *	keyæ ‡ç­¾
+ */
 public class Key extends Keys{
 	private String name;
 	private String value;
 	private String isArray;
-	//Ä¬ÈÏÊÇÒ»¸ö¶ÔÏó
+	//å•ä¸ªå¯¹è±¡
 	private List<Key> keychilds;
-	//Ä¬ÈÏÊÇÒ»¸öÊı×éÖĞµÄ¶ÔÏó
+	//æ•°ç»„å¯¹è±¡æœªå®ç°
 	private List<Arr> arrChilds;
 	public Key(){
 		

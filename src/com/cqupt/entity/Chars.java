@@ -1,11 +1,11 @@
 package com.cqupt.entity;
 /**
- * Ëæ»ú×Ö·û´®
+ * charsæ ‡ç­¾
  * @author 47
  *
  */
 public class Chars {
-	private String chars="ÎÒ,°®,Äã";
+	private String chars="æˆ‘,çˆ±,ä½ ";
 	private String open;
 	private String regex;
 	

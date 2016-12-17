@@ -7,16 +7,20 @@ import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 
 public class ParseImpl implements IParse{
-
+	
+	/**
+	 * è¯»å–é…ç½®æ–‡ä»¶
+	 */
 	@Override
 	public Document getAutoXml(String path) throws DocumentException {
-		//¶ÁÈ¡ÅäÖÃÎÄ¼şµ½file
 		File file = new File(path);
 		SAXReader reader = new SAXReader();
 		Document d = reader.read(file);
 		return d;
 	}
-
+	/**
+	 * é»˜è®¤è¯»å–é…ç½®æ–‡ä»¶
+	 */
 	@Override
 	public Document getAutoXml() throws DocumentException {
 		SAXReader reader = new SAXReader();

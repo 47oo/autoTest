@@ -2,13 +2,14 @@ package com.cqupt.entity;
 
 /**
  * 
- * @author 47 配置文件的最外层的属性
+ * @author 47 
+ * conf鏍囩
  */
 public class Conf {
 	private String type;
 	private String sum;
 	private String standard;
-	// conf的子节点且只有一个
+	// conf锟斤拷锟接节碉拷锟斤拷只锟斤拷一锟斤拷
 	private Keys keys;
 	private Chars chars;
 

@@ -1,7 +1,11 @@
 package com.cqupt.entity;
 
 import java.util.List;
-
+/**
+ * 
+ * @author 47
+ * keys标签,有且只能有一个
+ */
 public class Keys {
 	private List<Key> keyChilds;
 	

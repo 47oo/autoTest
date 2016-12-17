@@ -16,13 +16,13 @@ public class CMD {
 	public static void createTestCase(){
 		IParse ie = new ParseImpl();
 		try {
-			//¼ÓÔØÅäÖÃÎÄ¼ş
+			//åŠ è½½é…ç½®æ–‡ä»¶
 			Document d = ie.getAutoXml();
 			LoadEntity le = new LoadEntity();
-			//½«ÅäÖÃÎÄ¼şµÄ¶«Î÷×°ÔØµ½¶ÔÏó
+			//å°†é…ç½®æ–‡ä»¶ä¿¡æ¯è£…è½½åˆ°å¯¹è±¡
 			Conf conf = le.loadConf(d);
-			//×ª»¯Îª×Ö·û´®
 			ToString ts = new ToString();
+			//å°†å¯¹è±¡å†…å®¹è½¬åŒ–ä¸ºjsonå­—ç¬¦ä¸²
 			String target = ts.getNeedString(conf);
 			System.out.println(target);
 		} catch (Exception e) {
