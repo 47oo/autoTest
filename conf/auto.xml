@@ -4,10 +4,10 @@
 	<chars open="true" regex=",">我,爱,你</chars>
 	<!-- 数据的name,只需要name -->
 	<keys>
-		<key name="hanhao">
-			<key name="love"></key>
+		<key name="hh">
+			<key name="test"></key>
 		</key>
-		<key name="bingbing">
+		<key name="bb">
 			<key name="love">
 				<key name="for"></key>
 				<key name="ever"></key>
