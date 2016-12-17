@@ -24,9 +24,16 @@ public class ParseImpl implements IParse{
 	@Override
 	public Document getAutoXml() throws DocumentException {
 		SAXReader reader = new SAXReader();
-		String path = System.getProperty("user.dir") + "/conf/auto.xml";
+		String path = System.getProperty("user.dir");
+		File file = new File(path);
+		if(file.getParentFile().exists()){
+			path = file.getParentFile().getAbsolutePath()+"/conf/auto.xml";
+		}
+		file = new File(path);
+		if(!file.exists()){
+			path = System.getProperty("user.dir")+"/conf/auto.xml";
+		}
 		Document d = reader.read(new File(path));
 		return d;
 	}
-	
 }

@@ -41,7 +41,7 @@ public class Utils {
 	public static String toFile(String str,String to) throws IOException{
 		File file = new File(to);
 		while(file.exists()){
-			to = to +r.nextInt(10000);
+			to = r.nextInt(10000)+to;
 			file = new File(to);
 		}
 		FileOutputStream fos = null;
