@@ -1,49 +1,59 @@
 package com.cqupt.cmd;
 
-import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
-import org.dom4j.Attribute;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-
-import com.cqupt.entity.Arr;
-import com.cqupt.entity.Conf;
-import com.cqupt.entity.Key;
-import com.cqupt.entity.Keys;
-import com.cqupt.reflect.ObjectReflect;
-
+/**
+ * 
+ * @author 47 命令行启动 
+ * create default 
+ * create xmlpath 
+ * to savepath
+ */
 public class CmdStart {
+	private static String CMD_CREATE="create";
+	private static String CMD_TO="to";
+	//这里我就不写常量了
 	public static void main(String[] args) throws Exception {
-		SAXReader reader = new SAXReader();
-		String path = System.getProperty("user.dir") + "/conf/auto.xml";
-		Document d = reader.read(new File(path));
-		// ��ȡ���ڵ�
-		Element root = d.getRootElement();
-		String confname = root.getName();
-		Iterator<Attribute> it = root.attributeIterator();
-		ObjectReflect o = new ObjectReflect();
-		Conf conf = o.getObject(it, Conf.class);
-		System.out.println(conf);
-		Element chars = root.element("chars");
-		System.out.println(chars.getData());
-		//�Ƿ��л�ϵ�����
-		System.out.println(chars.hasMixedContent());
-		Element keys = root.element("keys");
-		System.out.println("==============================");
-		Keys ks = new Keys();
-		o.getObjectAll(keys.elementIterator(),ks);
-		/*System.out.println(keys.hasMixedContent());
-		List<Element> list = keys.elements();
-		for(int i =0;i<list.size();i++){
-			Element ee = list.get(i);
-			Iterator<Attribute> itt = ee.attributeIterator();
-			ObjectReflect oo = new ObjectReflect();
-			Key kk = oo.getObject(itt, Key.class);
-			System.out.println(kk);
-		}*/
-		System.out.println(Arr.class.getSimpleName());
+		if (args.length % 2 != 0) {
+			System.out.println("请仔细检查输入的命令");
+		} else {
+			Map<String, String> map = new HashMap<>();
+			for (int i = 0; i < args.length; i += 2) {
+				map.put(args[i], args[i + 1]);
+			}
+			start(map);
+		}
 	}
+
+	private static void start(Map<String, String> map) {
+		Set<Entry<String, String>> set = map.entrySet();
+		Iterator<Entry<String, String>> it = set.iterator();
+		String create = null;
+		String to =null;
+		while(it.hasNext()){
+			Entry<String, String> e = it.next();
+			if(CMD_CREATE.equals(e.getKey())){
+				create = e.getValue();
+			}else if(CMD_TO.equals(e.getKey())){
+				to=e.getValue();
+			}else{
+				System.out.println("[ERROR-AUTO]:无效命令!!!");
+			}
+		}
+		if(to==null||create==null){
+			System.out.println("[ERROR-AUTO]:请补全命令:");
+			System.out.println("命令格式: create default/xmlpath to savepath");
+			return;
+		}
+		if(create.equals("default")){
+			System.out.println(CMD.createTestCaseFile(to));
+		}else{
+			System.out.println(CMD.createTestCaseFile(create, to));
+		}
+	}
+	
 }

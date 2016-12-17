@@ -1,16 +1,20 @@
 package com.cqupt.utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Random;
 
 import com.cqupt.entity.Chars;
 
 /**
- * ¹¤¾ßÀà
+ *	å·¥å…·ç±»
  * @author 47
  *
  */
 public class Utils {
-	//Ëæ»úÉú³É×Ö·û´®·½·¨
+	//ç”Ÿæˆéšæœºå­—ç¬¦ä¸²
 	private static Random r = new Random();
 	public static String RandomString(Chars c){
 		StringBuilder sb = new StringBuilder();
@@ -25,5 +29,34 @@ public class Utils {
 //		i++;
 //		System.out.println(i);
 		return sb.toString();
+	}
+	/**
+	 * 
+	 * @param strè¦å¯¼å‡ºçš„å­—ç¬¦ä¸²
+	 * @param to å¯¼å‡ºå­—ç¬¦ä¸²ä½ç½®
+	 * @return
+	 * @throws IOException 
+	 */
+	
+	public static String toFile(String str,String to) throws IOException{
+		File file = new File(to);
+		while(file.exists()){
+			to = to +r.nextInt(10000);
+			file = new File(to);
+		}
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file);
+			fos.write(str.getBytes());
+		} catch (FileNotFoundException e) {
+			System.out.println("[ERROR-ATHO]:æ–‡ä»¶æ²¡æœ‰æ‰¾åˆ°");
+		} catch (IOException e) {
+			System.out.println("[ERROR-ATHO]:IOå¼‚å¸¸");
+		}finally{
+			if(fos!=null){
+				fos.close();
+			}
+		}
+		return "å·²ç»ä¿å­˜åˆ°"+to;
 	}
 }
