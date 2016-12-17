@@ -4,7 +4,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import org.dom4j.Attribute;
 import org.dom4j.Element;
@@ -33,7 +32,8 @@ public class ObjectReflect{
 	 * @throws InvocationTargetException 
 	 * @throws IllegalArgumentException 
 	 */
-	public <T>T getObject(Iterator<Attribute> it,Class<T> clazz) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+	@SuppressWarnings("unchecked")
+	public static <T>T getObject(Iterator<Attribute> it,Class<T> clazz) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
 		Object obj = clazz.newInstance();
 		while(it.hasNext()){
 			Attribute ae = it.next();
@@ -46,24 +46,25 @@ public class ObjectReflect{
 	}
 	
 	//循环嵌套,获得子节点和它的属性值
-	public void getObjectAll(Iterator<Element> it,Keys k) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
-		ArrayList<Key> arr = new ArrayList<>();
+	@SuppressWarnings("unchecked")
+	public static void getObjectAll(Iterator<Element> it,Keys k) throws InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException{
+		ArrayList<Key> keys = new ArrayList<>();
 		while(it.hasNext()){
 			Element e = it.next();
 			Key key = getObject(e.attributeIterator(),Key.class);
 			if(e.hasMixedContent()){
 				getObjectAll(e.elementIterator(),key);
 			}
-			arr.add(key);
+			keys.add(key);
 		}
-		k.setKeyChilds(arr);
+		k.setKeyChilds(keys);
 	}
 	/**
 	 * 将节点名的第一个字母变为大写
 	 * @param name
 	 * @return
 	 */
-	private String getUpperByFirst(String name){
+	private static String getUpperByFirst(String name){
 		if(name==null||name.trim().equals("")){
 			throw new RuntimeException("auto:====>>>name不能为空");
 		}

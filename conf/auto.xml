@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 生成格式,生成数量,生成标准 -->
-<conf type="json" sum="10" standard="true">
-	<chars open="true">我,爱,你</chars>
+<conf type="json" sum="3" standard="true">
+	<chars open="true" regex=",">我,爱,你</chars>
 	<!-- 数据的name,只需要name -->
 	<keys>
 		<key name="hanhao">
 			<key name="love"></key>
 		</key>
-		<key name="bingbing"></key>
+		<key name="bingbing">
+			<key name="love">
+				<key name="for"></key>
+				<key name="ever"></key>
+			</key>
+			<key name="too"></key>
+		</key>
 	</keys>
 </conf>

@@ -11,7 +11,7 @@ public class Keys {
 	public void setKeyChilds(List<Key> keys){
 		this.keyChilds =keys;
 	}
-	public List<Key> getList(){
+	public List<Key> getKeychilds(){
 		return keyChilds;
 	}
 }

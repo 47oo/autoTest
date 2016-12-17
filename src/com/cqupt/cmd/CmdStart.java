@@ -9,6 +9,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import com.cqupt.entity.Arr;
 import com.cqupt.entity.Conf;
 import com.cqupt.entity.Key;
 import com.cqupt.entity.Keys;
@@ -31,9 +32,9 @@ public class CmdStart {
 		//是否有混合的内容
 		System.out.println(chars.hasMixedContent());
 		Element keys = root.element("keys");
+		System.out.println("==============================");
 		Keys ks = new Keys();
 		o.getObjectAll(keys.elementIterator(),ks);
-		System.out.println(ks.getList().get(0).getKeychilds().get(0));
 		/*System.out.println(keys.hasMixedContent());
 		List<Element> list = keys.elements();
 		for(int i =0;i<list.size();i++){
@@ -43,5 +44,6 @@ public class CmdStart {
 			Key kk = oo.getObject(itt, Key.class);
 			System.out.println(kk);
 		}*/
+		System.out.println(Arr.class.getSimpleName());
 	}
 }
